@@ -30,7 +30,7 @@ This folder contains a minimal Express-based backend (stubs) for the Tech E‑Co
 - Auth
   - `POST /api/v1/auth/register`
   - `POST /api/v1/auth/login`
-  - `POST /api/v1/auth/refresh`
+
 - Products
   - `GET /api/v1/products`
   - `GET /api/v1/products/:id`
