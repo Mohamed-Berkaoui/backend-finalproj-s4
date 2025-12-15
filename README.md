@@ -36,9 +36,7 @@ This folder contains a minimal Express-based backend (stubs) for the Tech E‑Co
   - `GET /api/v1/products/:id`
   - `POST /api/v1/products` (admin)
   - `PATCH /api/v1/products/:id` (admin)
-- Cart
-  - `GET /api/v1/cart`
-  - `POST /api/v1/cart/items`
+
 - Orders
   - `POST /api/v1/orders` (creates order and payment intent)
   - `GET /api/v1/orders/:id`
