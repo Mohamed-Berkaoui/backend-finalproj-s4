@@ -2,7 +2,9 @@ const userModel = require("../models/user");
 const bcrypt = require("bcryptjs");
 const generateToken = require("../utils/generateToken");
 const { AppSuccess, AppFail } = require("../utils/AppResponces");
-
+const verificationUserModel = require("../models/verificationUser");
+const sendMail = require("../utils/mailer");
+const crypto=require('crypto')
 async function register(req, res) {
   const { name, email, password } = req.body;
   const existuser = await userModel.findOne({ email: email });
@@ -15,12 +17,22 @@ async function register(req, res) {
     email,
     password: hashedPasswoed,
   });
+  const hash=crypto.randomBytes(32).toString("hex");
+  const newVerificationUser=await verificationUserModel.insertOne({
+    userId:newUser._id,
+    hash:hash,
+  })
+
+  //send verification email
+  await sendMail(newUser.email,newUser._id,hash);
+ 
+
   res.status(201).json(new AppSuccess(newUser));
 }
 
 async function login(req, res) {
   const { email, password } = req.body;
-  const existuser = await userModel.findOne({ email: email });
+  const existuser = await userModel.findOne({ email: email,status:"active" });
   if (!existuser) {
     return res.status(400).json(new AppFail("somthing went wrong"));
   }
