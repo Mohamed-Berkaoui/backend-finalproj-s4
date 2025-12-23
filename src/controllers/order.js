@@ -1,4 +1,4 @@
-const orderModel = require("../models/product");
+const orderModel = require("../models/order");
 const { AppSuccess, AppFail } = require("../utils/AppResponces");
 
 async function addNewOrder(req, res) {
